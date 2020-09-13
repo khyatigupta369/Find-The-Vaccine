@@ -1,0 +1,66 @@
+.map{
+  background-color: black;
+}
+.mapdiv{
+  margin-top: 30px;
+  margin-left: 300px;
+}
+path{
+  fill: orange;
+  stroke: black;
+}
+.c1, .c2, .c3, .c4, .c5{
+  fill: orange;
+}
+.right{
+  fill:  green;
+}
+.wrong{
+  fill: red;
+}
+.countryGrid{
+  background-color: #12cad6;
+}
+.myMap{
+  margin: 30px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 100px;
+}
+.card{
+  display: inline-block;
+  margin: 10px;
+}
+.card-img-top{
+  padding: 10px;
+}
+header{
+  background-color: #0fabbc;
+}
+h1{
+  color: #fff;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+}
+
+h5{
+  text-align: center;
+}
+.mapbuttons{
+  margin-top: 40px;
+  text-align: center;
+}
+form{
+  display: inline;
+}
+.populationBox{
+  color: #fff;
+  text-align: center;
+  margin: 15px;
+}
+.displayBtn{
+  display: none;
+}
+.btn{
+  text-align: center;
+}
