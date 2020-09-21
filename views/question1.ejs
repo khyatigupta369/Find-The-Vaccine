@@ -23,7 +23,7 @@
     font-weight: 200;
   }
 </style>
-
+<body>
 <div class="col-md-8" style="float:right;">
   <form id="quiz" name="quiz" action="/question1" method="post">
     <p>2 + 2 = </p>
@@ -52,20 +52,19 @@
     if (ans1.value === "4") {
       var x = pop1 / 2;
       document.getElementById("pop2").value = x;
-      console.log("population q1: " + document.getElementById("pop2").value);
     } else {
       var y = pop1 * 2;
       document.getElementById("pop2").value = y;
-      console.log("population: " + document.getElementById("pop2").value);
     }
 
   }
 </script>
 <script>
-  if (sessionStorage.getItem("total_seconds")) {
-    var total_seconds = sessionStorage.getItem("total_seconds");
+
+  if (sessionStorage.getItem("total_seconds1")) {
+    var total_seconds = sessionStorage.getItem("total_seconds1");
   } else {
-    var total_seconds = 60 * 0.5;
+    var total_seconds = 60 * 5;
   }
   var minutes = parseInt(total_seconds / 60);
   var seconds = parseInt(total_seconds % 60);
@@ -87,9 +86,11 @@
       total_seconds = total_seconds - 1;
       minutes = parseInt(total_seconds / 60);
       seconds = parseInt(total_seconds % 60);
-      sessionStorage.setItem("total_seconds", total_seconds)
+      sessionStorage.setItem("total_seconds1", total_seconds)
       setTimeout("countDownTimer()", 1000);
     }
   }
   setTimeout("countDownTimer()", 1000);
 </script>
+
+</body>

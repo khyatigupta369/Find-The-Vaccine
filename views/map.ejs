@@ -3,10 +3,12 @@ state1<!DOCTYPE html>
 
 <head>
   <meta charset="utf-8">
-  <title>Find The Vaccine</title>
+  <title>Team <%= name %></title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+</script>
 
 </head>
 
@@ -54,49 +56,53 @@ state1<!DOCTYPE html>
   <input type="hidden" class="con4" name="" value=<%= ques9 %>>
   <input type="hidden" class="con5" name="" value=<%= ques10 %>>
 
+  <input type="hidden" class="ans11" name="" value=<%= ques11 %>>
+  <input type="hidden" class="ans12" name="" value=<%= ques12 %>>
+  <input type="hidden" class="ans13" name="" value=<%= ques13 %>>
+  <input type="hidden" class="ans14" name="" value=<%= ques14 %>>
+  <input type="hidden" class="ans15" name="" value=<%= ques15 %>>
+
   <div class="populationBox">
       <h3>Infected Population</h3>
       <h6 id="infected"><%= population %></h6>
     </div>
   <div class="mapbuttons">
-    <form class="" action="/" method="post">
+    <form id="f1" action=<%= "/map/" + name %> method="post" onsubmit="return checkForm(this);">
       <button class="btn-lg btn btn-warning b1" type="submit" name="btn" value="1">Question 1</button>
     </form>
-    <form class="" action="/" method="post">
+    <form class="" action=<%= "/map/" + name %> method="post">
       <button class="btn-lg btn btn-warning b2" type="submit" name="btn" value="2">Question 2</button>
     </form>
-    <form class="" action="/" method="post">
+    <form class="" action=<%= "/map/" + name %> method="post">
       <button class="btn-lg btn btn-warning b3" type="submit" name="btn" value="3">Question 3</button>
     </form>
-    <form class="" action="/" method="post">
+    <form class="" action=<%= "/map/" + name %> method="post">
       <button class="btn-lg btn btn-warning b4" type="submit" name="btn" value="4">Question 4</button>
     </form>
-    <form class="" action="/" method="post">
+    <form class="" action=<%= "/map/" + name %> method="post">
       <button class="btn-lg btn btn-warning b5" type="submit" name="btn" value="5">Question 5</button>
     </form>
   </div>
 
   <div class="mapbuttons">
-  <form class="" action="/" method="post">
+  <form class="" action=<%= "/map/" + name %> method="post">
     <button class="btn-md btn btn-danger b6 displayBtn" type="submit" name="btn" value="6">Containment Zone for Question1</button>
   </form>
-  <form class="" action="/" method="post">
+  <form class="" action=<%= "/map/" + name %> method="post">
     <button class="btn-md btn btn-danger b7 displayBtn" type="submit" name="btn" value="7">Containment Zone for Question2</button>
   </form>
-  <form class="" action="/" method="post">
+  <form class="" action=<%= "/map/" + name %> method="post">
     <button class="btn-md btn btn-danger b8 displayBtn" type="submit" name="btn" value="8">Containment Zone for Question3</button>
   </form>
-  <form class="" action="/" method="post">
+  <form class="" action=<%= "/map/" + name %> method="post">
     <button class="btn-md btn btn-danger b9 displayBtn" type="submit" name="btn" value="9">Containment Zone for Question4</button>
   </form>
-  <form class="" action="/" method="post">
+  <form class="" action=<%= "/map/" + name %> method="post">
     <button class="btn-md btn btn-danger b10 displayBtn" type="submit" name="btn" value="10">Containment Zone for Question5</button>
   </form>
   </div>
 
 
   </body>
-
-
-<script type="text/javascript" src="/map.js"></script>
+<script type="text/javascript" src=<%= "/" + name + "/map.js" %>></script>
 </html>

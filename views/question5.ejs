@@ -92,8 +92,8 @@ function checkSecond(sec)
 
   </script>
   <script>
-    if (sessionStorage.getItem("total_seconds")) {
-      var total_seconds = sessionStorage.getItem("total_seconds");
+    if (sessionStorage.getItem("total_seconds5")) {
+      var total_seconds = sessionStorage.getItem("total_seconds5");
     } else {
       var total_seconds = 60 * 0.5;
     }
@@ -117,7 +117,7 @@ function checkSecond(sec)
         total_seconds = total_seconds - 1;
         minutes = parseInt(total_seconds / 60);
         seconds = parseInt(total_seconds % 60);
-        sessionStorage.setItem("total_seconds", total_seconds)
+        sessionStorage.setItem("total_seconds5", total_seconds)
         setTimeout("countDownTimer()", 1000);
       }
     }
