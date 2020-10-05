@@ -1,0 +1,47 @@
+body{
+    background-image: url("/images/smoky.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0,0,0,0.1);
+    margin: auto;
+    padding: 0;
+}
+.quest{
+    background-color: black;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    border: solid 1px yellow;
+    border-radius: 15px;
+    margin-top: 40px;
+    width: 75%;
+}
+p{
+    text-align: center;
+    font-size: 35px;
+    color: white;
+}
+.content{
+    align-content: center;
+}
+table{
+    margin-top: 100px;
+    text-align: center;
+    padding: 20px;
+    width: 25%;
+    color: white;
+}
+.table{
+    color: white;
+}
+.table .table-borderless .td{
+    width: 25%;
+    color: white;
+}
+.tab{
+    text-align: center;
+    margin: 0 auto;
+    background-color: black;
+    width: 25%;
+}

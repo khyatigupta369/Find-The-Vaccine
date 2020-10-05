@@ -1,30 +1,7 @@
 <%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/quesstyle.css">
 
-<style>
-  .td {
-    text-align: center;
-    vertical-align: middle;
-    width: 100%
-  }
-
-  .table {
-    width: 25%;
-  }
-
-  #timer {
-    font-size: 30px;
-    text-align: center;
-  }
-
-  .header {
-    text-align: center;
-    font-family: 'serif';
-    font-size: 20px;
-    font-weight: 200;
-  }
-</style>
-<body>
-<div class="col-md-8" style="float:right;">
+<div class="quest">
   <form id="quiz" name="quiz" action="/question1" method="post">
     <p>2 + 2 = </p>
     <input type="text" class="ans1" name="ans1" value="">
@@ -32,18 +9,24 @@
     <br>
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
-    <button class="btn btn-primary btn-lg" type="submit" onclick="changePopulation()" name="button">Submit</button>
+    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation()" name="button" value="1">Submit</button>
   </form>
 </div>
 
-<table class="table table-dark table-borderless col-md-3">
+<table class="table table-borderless">
   <tr class="header">
-    <td>TIME LEFT (in minutes) </td>
+    <td style="color: white;">TIME LEFT (in minutes) </td>
   <tr>
-    <td id="timer"></td>
+    <td id="timer" style="color: white;"></td>
   </tr>
-
+  <input type="hidden" id="timeLeft" name="" value=<%= timeLeft1 %>>
 </table>
+
+<form class="timerForm" action="/question1" method="post">
+  <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
+  <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
+</form>
+
 <script type="text/javascript">
   function changePopulation() {
     var ans1 = document.querySelector(".ans1")
@@ -52,20 +35,28 @@
     if (ans1.value === "4") {
       var x = pop1 / 2;
       document.getElementById("pop2").value = x;
+      console.log("population: " + document.getElementById("pop2").value);
     } else {
       var y = pop1 * 2;
       document.getElementById("pop2").value = y;
+      console.log("population: " + document.getElementById("pop2").value);
     }
-
   }
 </script>
+
 <script>
+  // if (sessionStorage.getItem("total_seconds1")) {
+  //   var total_seconds = sessionStorage.getItem("total_seconds1");
+  // } else {
+  //   var total_seconds = 60 * 0.5;
+  // }
 
   if (sessionStorage.getItem("total_seconds1")) {
     var total_seconds = sessionStorage.getItem("total_seconds1");
   } else {
-    var total_seconds = 60 * 5;
+    var total_seconds = document.querySelector("#timeLeft").value;
   }
+
   var minutes = parseInt(total_seconds / 60);
   var seconds = parseInt(total_seconds % 60);
 
@@ -78,19 +69,20 @@
     }
 
     document.getElementById("timer").innerHTML = minutes + " : " + seconds;
-    if (total_seconds <= 0) {
-      changePopulation();
-      document.forms["quiz"].submit();
-
-    } else {
+    if (total_seconds > 0) {
+      setInterval(function() {
+        document.querySelector("#timeLeftData").value = total_seconds;
+        document.getElementById("button2").click();
+      }, 10000);
       total_seconds = total_seconds - 1;
       minutes = parseInt(total_seconds / 60);
       seconds = parseInt(total_seconds % 60);
-      sessionStorage.setItem("total_seconds1", total_seconds)
+      sessionStorage.setItem("total_seconds1", total_seconds);
       setTimeout("countDownTimer()", 1000);
+    } else {
+      changePopulation();
+      document.getElementById("button1").click();
     }
   }
   setTimeout("countDownTimer()", 1000);
 </script>
-
-</body>

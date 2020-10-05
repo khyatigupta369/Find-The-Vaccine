@@ -1,31 +1,7 @@
 <%- include("partials/header.ejs"); %>
+<link rel="stylesheet" href="/css/quesstyle.css">
 
-  <style>
-  	.td{
-	text-align: center;
-	  vertical-align: middle;
-	  width: 100%
-
-
-}
-.table{
-	width: 25%;
-}
-
-#timer{
-	font-size:30px;
-}
-
-.header{
-	text-align: center;
-	font-family: 'serif';
-	font-size: 20px;
-	font-weight: 200;
-}
-
-  </style>
-
-	<div class="col-md-8" style= "float:right;">
+<div class="quest">
 	<form id="quiz" action="/containmentZone2" method="post">
     <p>2 + 8 = </p>
     <input type="text" class="con2" name="con2" value="">
@@ -33,16 +9,24 @@
     <br>
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
-    <button class="btn btn-primary btn-lg" type="submit" onclick="changePopulation()" name="button">Submit</button>
+    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation()" name="button" value="1">Submit</button>
   </form>
   </div>
 
-  <table class="table table-dark table-borderless col-md-3">
-  <tr class="header"><td>TIME LEFT (in minutes) </td>
-  	<tr>
-  		<td id="timer"></td></tr>
+  <table class="table table-borderless">
+    <tr class="header">
+      <td style="color: white;">TIME LEFT (in minutes) </td>
+    <tr>
+      <td id="timer" style="color: white;"></td>
+    </tr>
+    <input type="hidden" id="timeLeft" name="" value=<%= timeLeft7 %>>
+  </table>
 
-   </table>
+  <form class="timerForm" action="/containmentZone2" method="post">
+    <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
+    <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
+  </form>
+
    <script type="text/javascript">
      function changePopulation(){
        var con2 = document.querySelector(".con2")
@@ -60,35 +44,45 @@
      }
 
    </script>
-   <script>
-     if (sessionStorage.getItem("total_seconds")) {
-       var total_seconds = sessionStorage.getItem("total_seconds");
-     } else {
-       var total_seconds = 60 * 0.5;
-     }
-     var minutes = parseInt(total_seconds / 60);
-     var seconds = parseInt(total_seconds % 60);
+	 <script>
+	   // if (sessionStorage.getItem("total_seconds1")) {
+	   //   var total_seconds = sessionStorage.getItem("total_seconds1");
+	   // } else {
+	   //   var total_seconds = 60 * 0.5;
+	   // }
 
-     function countDownTimer() {
-       if (seconds < 10) {
-         seconds = "0" + seconds;
-       }
-       if (minutes < 10) {
-         minutes = "0" + minutes;
-       }
+	   if (sessionStorage.getItem("total_seconds7")) {
+	     var total_seconds = sessionStorage.getItem("total_seconds7");
+	   } else {
+	     var total_seconds = document.querySelector("#timeLeft").value;
+	   }
 
-       document.getElementById("timer").innerHTML = minutes + " : " + seconds;
-       if (total_seconds <= 0) {
-         changePopulation();
-         document.querySelector("#quiz").submit();
+	   var minutes = parseInt(total_seconds / 60);
+	   var seconds = parseInt(total_seconds % 60);
 
-       } else {
-         total_seconds = total_seconds - 1;
-         minutes = parseInt(total_seconds / 60);
-         seconds = parseInt(total_seconds % 60);
-         sessionStorage.setItem("total_seconds", total_seconds)
-         setTimeout("countDownTimer()", 1000);
-       }
-     }
-     setTimeout("countDownTimer()", 1000);
-   </script>
+	   function countDownTimer() {
+	     if (seconds < 10) {
+	       seconds = "0" + seconds;
+	     }
+	     if (minutes < 10) {
+	       minutes = "0" + minutes;
+	     }
+
+	     document.getElementById("timer").innerHTML = minutes + " : " + seconds;
+	     if (total_seconds > 0) {
+	       total_seconds = total_seconds - 1;
+	       minutes = parseInt(total_seconds / 60);
+	       seconds = parseInt(total_seconds % 60);
+	       sessionStorage.setItem("total_seconds7", total_seconds);
+	       setInterval(function() {
+	         document.querySelector("#timeLeftData").value = total_seconds;
+	         document.getElementById("button2").click();
+	       }, 10000);
+	       setTimeout("countDownTimer()", 1000);
+	     } else {
+	       changePopulation();
+	       document.getElementById("button1").click();
+	     }
+	   }
+	   setTimeout("countDownTimer()", 1000);
+	 </script>

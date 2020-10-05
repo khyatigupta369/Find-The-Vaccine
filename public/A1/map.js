@@ -162,3 +162,10 @@ if(ans15!=="sbvjzhbjkws"){
   }
   document.querySelector(".b5").disabled = true;
 }
+
+// window.onload = function(){
+//   if((document.querySelectorAll(".b1,.b2,.b3,.b4,.b5").disabled == true) &&
+//   (document.querySelectorAll(".b6,.b7,.b8,.b9,.b10").classList.contains("displayBtn"))){
+//     document.querySelector(".submitGame").submit();
+//   }
+// }

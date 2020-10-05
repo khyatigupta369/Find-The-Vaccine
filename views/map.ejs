@@ -1,4 +1,4 @@
-state1<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -67,42 +67,56 @@ state1<!DOCTYPE html>
       <h6 id="infected"><%= population %></h6>
     </div>
   <div class="mapbuttons">
-    <form id="f1" action=<%= "/map/" + name %> method="post" onsubmit="return checkForm(this);">
+    <form id="f1" action=<%= "/map/" + userId %> method="post" onsubmit="return checkForm(this);">
       <button class="btn-lg btn btn-warning b1" type="submit" name="btn" value="1">Question 1</button>
     </form>
-    <form class="" action=<%= "/map/" + name %> method="post">
+    <form class="" action=<%= "/map/" + userId %> method="post">
       <button class="btn-lg btn btn-warning b2" type="submit" name="btn" value="2">Question 2</button>
     </form>
-    <form class="" action=<%= "/map/" + name %> method="post">
+    <form class="" action=<%= "/map/" + userId %> method="post">
       <button class="btn-lg btn btn-warning b3" type="submit" name="btn" value="3">Question 3</button>
     </form>
-    <form class="" action=<%= "/map/" + name %> method="post">
+    <form class="" action=<%= "/map/" + userId %> method="post">
       <button class="btn-lg btn btn-warning b4" type="submit" name="btn" value="4">Question 4</button>
     </form>
-    <form class="" action=<%= "/map/" + name %> method="post">
+    <form class="" action=<%= "/map/" + userId %> method="post">
       <button class="btn-lg btn btn-warning b5" type="submit" name="btn" value="5">Question 5</button>
     </form>
   </div>
 
   <div class="mapbuttons">
-  <form class="" action=<%= "/map/" + name %> method="post">
+  <form class="" action=<%= "/map/" + userId %> method="post">
     <button class="btn-md btn btn-danger b6 displayBtn" type="submit" name="btn" value="6">Containment Zone for Question1</button>
   </form>
-  <form class="" action=<%= "/map/" + name %> method="post">
+  <form class="" action=<%= "/map/" + userId %> method="post">
     <button class="btn-md btn btn-danger b7 displayBtn" type="submit" name="btn" value="7">Containment Zone for Question2</button>
   </form>
-  <form class="" action=<%= "/map/" + name %> method="post">
+  <form class="" action=<%= "/map/" + userId %> method="post">
     <button class="btn-md btn btn-danger b8 displayBtn" type="submit" name="btn" value="8">Containment Zone for Question3</button>
   </form>
-  <form class="" action=<%= "/map/" + name %> method="post">
+  <form class="" action=<%= "/map/" + userId %> method="post">
     <button class="btn-md btn btn-danger b9 displayBtn" type="submit" name="btn" value="9">Containment Zone for Question4</button>
   </form>
-  <form class="" action=<%= "/map/" + name %> method="post">
+  <form class="" action=<%= "/map/" + userId %> method="post">
     <button class="btn-md btn btn-danger b10 displayBtn" type="submit" name="btn" value="10">Containment Zone for Question5</button>
   </form>
+
+  <form class="submitGame" action=<%= "/map/" + userId %> method="post">
+    <button class="btn-md btn btn-secondary" name="btn" type="submit" value="16">Submit Game</button>
+  </form>
+
   </div>
 
 
   </body>
 <script type="text/javascript" src=<%= "/" + name + "/map.js" %>></script>
+<!-- <script>
+function preventBack() {
+window.history.forward();
+}
+setTimeout("preventBack()", 0);
+window.onunload = function() {
+null
+};
+</script> -->
 </html>
