@@ -23,7 +23,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/innerveDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://admin123:Thisisfindthevaccine@cluster0-shard-00-00.rwtqh.mongodb.net:27017,cluster0-shard-00-01.rwtqh.mongodb.net:27017,cluster0-shard-00-02.rwtqh.mongodb.net:27017/innerveDB?ssl=true&replicaSet=atlas-w87s30-shard-0&authSource=admin&retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
 
 const innerveSchema = new mongoose.Schema({
