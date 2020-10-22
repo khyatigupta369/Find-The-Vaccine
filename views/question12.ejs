@@ -10,7 +10,7 @@
     <br>
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
-    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation()" name="button" value="1">Submit</button>
+    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation12()" name="button" value="1">Submit</button>
   </form>
 </div>
 
@@ -28,21 +28,7 @@
   <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
 </form>
 
-<script type="text/javascript">
-  function changePopulation() {
-    var ans12 = document.querySelector(".ans12")
-    var pop1 = document.getElementById("pop1").value;
-
-    if (ans12.value === "6") {
-      var x = pop1 / 2;
-      document.getElementById("pop2").value = x;
-    } else {
-      var y = pop1 * 2;
-      document.getElementById("pop2").value = y;
-    }
-
-  }
-</script>
+<script type="text/javascript" src="/answers.js"></script>
 <script>
   // if (sessionStorage.getItem("total_seconds9")) {
   //   var total_seconds = sessionStorage.getItem("total_seconds9");

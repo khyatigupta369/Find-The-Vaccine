@@ -9,7 +9,7 @@
     <br>
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
-    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation()" name="button" value="1">Submit</button>
+    <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation1()" name="button" value="1">Submit</button>
   </form>
 </div>
 
@@ -26,22 +26,21 @@
   <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
   <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
 </form>
-
-<script type="text/javascript">
-  function changePopulation() {
-    var ans1 = document.querySelector(".ans1")
-    var pop1 = document.getElementById("pop1").value;
-
-    if (ans1.value === "4") {
-      var x = pop1 / 2;
-      document.getElementById("pop2").value = x;
-      console.log("population: " + document.getElementById("pop2").value);
-    } else {
-      var y = pop1 * 2;
-      document.getElementById("pop2").value = y;
-      console.log("population: " + document.getElementById("pop2").value);
-    }
-  }
+<script type="text/javascript" src="/answers.js">
+  // function changePopulation() {
+  //   var ans1 = document.querySelector(".ans1")
+  //   var pop1 = document.getElementById("pop1").value;
+  //
+  //   if (ans1.value === "4") {
+  //     var x = pop1 / 2;
+  //     document.getElementById("pop2").value = x;
+  //     console.log("population: " + document.getElementById("pop2").value);
+  //   } else {
+  //     var y = pop1 * 2;
+  //     document.getElementById("pop2").value = y;
+  //     console.log("population: " + document.getElementById("pop2").value);
+  //   }
+  // }
 </script>
 
 <script>
