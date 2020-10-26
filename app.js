@@ -321,11 +321,12 @@ app.post("/map/:userId",(req,res)=>{
 
 app.post("/question1", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans1;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question1: answer,population: infectedPopulation}, (err, found)=>{
+    console.log(userId);
+    Innerve.findOneAndUpdate({_id: userId}, {question1: answer,population: infectedPopulation}, (err, found)=>{
       if(err){
         console.log(err);
       }else{
@@ -336,12 +337,15 @@ app.post("/question1", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft1: timeLeft}, (err,found)=>{
+    var userId = req.body.userId;
+    console.log(userId);
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft1: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question1",{population: found.population, timeLeft1: timeLeft, userId: userId});
+        console.log(found._id);
+        res.render("question1",{population: found.population, timeLeft1: timeLeft, userId: found._id});
       }
     });
   }
@@ -350,11 +354,11 @@ app.post("/question1", (req,res)=>{
 
 app.post("/question2", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question2: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -364,13 +368,14 @@ app.post("/question2", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft2: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft2: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question2",{population: found.population, timeLeft2: timeLeft, userId: userId});
+        res.render("question2",{population: found.population, timeLeft2: timeLeft, userId: found._id});
       }
     });
   }
@@ -379,11 +384,11 @@ app.post("/question2", (req,res)=>{
 
 app.post("/question3", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans3;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question3: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -393,13 +398,14 @@ app.post("/question3", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft3: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft3: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question3",{population: found.population, timeLeft3: timeLeft, userId: userId});
+        res.render("question3",{population: found.population, timeLeft3: timeLeft, userId: found._id});
       }
     });
   }
@@ -408,11 +414,11 @@ app.post("/question3", (req,res)=>{
 
 app.post("/question4", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans4;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question4: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -422,13 +428,14 @@ app.post("/question4", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft4: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft4: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question4",{population: found.population, timeLeft4: timeLeft, userId: userId});
+        res.render("question4",{population: found.population, timeLeft4: timeLeft, userId: found._id});
       }
     });
   }
@@ -437,11 +444,11 @@ app.post("/question4", (req,res)=>{
 // question5
 app.post("/question5", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans5;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question5: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -451,13 +458,14 @@ app.post("/question5", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft5: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft5: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question5",{population: found.population, timeLeft5: timeLeft, userId: userId});
+        res.render("question5",{population: found.population, timeLeft5: timeLeft, userId: found._id});
       }
     });
   }
@@ -466,11 +474,11 @@ app.post("/question5", (req,res)=>{
 //containment1
 app.post("/containmentZone1", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.con1;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {containment1: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {containment1: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -480,13 +488,14 @@ app.post("/containmentZone1", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft6: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft6: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment1",{population: found.population, timeLeft6: timeLeft, userId: userId});
+        res.render("containment1",{population: found.population, timeLeft6: timeLeft, userId: found._id});
       }
     });
   }
@@ -495,11 +504,11 @@ app.post("/containmentZone1", (req,res)=>{
 //containment2
 app.post("/containmentZone2", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.con2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {containment2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {containment2: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -509,13 +518,14 @@ app.post("/containmentZone2", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft7: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft7: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment2",{population: found.population, timeLeft7: timeLeft, userId: userId});
+        res.render("containment2",{population: found.population, timeLeft7: timeLeft, userId: found._id});
       }
     });
   }
@@ -524,11 +534,11 @@ app.post("/containmentZone2", (req,res)=>{
 //containment3
 app.post("/containmentZone3", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.con3;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {containment3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {containment3: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -538,13 +548,14 @@ app.post("/containmentZone3", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft8: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft8: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment3",{population: found.population, timeLeft8: timeLeft, userId: userId});
+        res.render("containment3",{population: found.population, timeLeft8: timeLeft, userId: found._id});
       }
     });
   }
@@ -553,11 +564,11 @@ app.post("/containmentZone3", (req,res)=>{
 //containment14
 app.post("/containmentZone4", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.con4;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {containment4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {containment4: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -567,13 +578,14 @@ app.post("/containmentZone4", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft9: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft9: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment4",{population: found.population, timeLeft9: timeLeft, userId: userId});
+        res.render("containment4",{population: found.population, timeLeft9: timeLeft, userId: found._id});
       }
     });
   }
@@ -582,11 +594,11 @@ app.post("/containmentZone4", (req,res)=>{
 //containment5
 app.post("/containmentZone5", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.con5;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {containment5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {containment5: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -596,13 +608,14 @@ app.post("/containmentZone5", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft10: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft10: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment5",{population: found.population, timeLeft10: timeLeft, userId: userId});
+        res.render("containment5",{population: found.population, timeLeft10: timeLeft, userId: found._id});
       }
     });
   }
@@ -611,11 +624,11 @@ app.post("/containmentZone5", (req,res)=>{
 //question11
 app.post("/question11", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans11;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question11: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question11: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -625,13 +638,14 @@ app.post("/question11", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft11: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft11: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question11",{population: found.population, timeLeft11: timeLeft, userId: userId});
+        res.render("question11",{population: found.population, timeLeft11: timeLeft, userId: found._id});
       }
     });
   }
@@ -640,11 +654,11 @@ app.post("/question11", (req,res)=>{
 //question12
 app.post("/question12", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans12;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question12: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question12: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -654,13 +668,14 @@ app.post("/question12", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft12: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft12: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question12",{population: found.population, timeLeft12: timeLeft, userId: userId});
+        res.render("question12",{population: found.population, timeLeft12: timeLeft, userId: found._id});
       }
     });
   }
@@ -669,11 +684,11 @@ app.post("/question12", (req,res)=>{
 //question13
 app.post("/question13", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans13;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question13: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question13: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -683,13 +698,14 @@ app.post("/question13", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft13: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft13: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question13",{population: found.population, timeLeft13: timeLeft, userId: userId});
+        res.render("question13",{population: found.population, timeLeft13: timeLeft, userId: found._id});
       }
     });
   }
@@ -698,11 +714,11 @@ app.post("/question13", (req,res)=>{
 //question14
 app.post("/question14", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans14;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question14: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question14: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -712,13 +728,14 @@ app.post("/question14", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft14: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft14: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question14",{population: found.population, timeLeft14: timeLeft, userId: userId});
+        res.render("question14",{population: found.population, timeLeft14: timeLeft, userId: found._id});
       }
     });
   }
@@ -727,11 +744,11 @@ app.post("/question14", (req,res)=>{
 //question15
 app.post("/question15", (req,res)=>{
   var formButton = req.body.button;
-  var userId = req.body.userId;
   if(formButton==="1"){
+    var userId = req.body.userId2;
     var answer = req.body.ans15;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({_id: userId}, {question15: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {question15: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -741,13 +758,14 @@ app.post("/question15", (req,res)=>{
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
+    var userId = req.body.userId;
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({_id: userId}, {timeLeft15: timeLeft}, (err,found)=>{
+    Innerve.findOneAndUpdate({_id: userId}, {timeLeft15: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question15",{population: found.population, timeLeft15: timeLeft, userId: userId});
+        res.render("question15",{population: found.population, timeLeft15: timeLeft, userId: found._id});
       }
     });
   }

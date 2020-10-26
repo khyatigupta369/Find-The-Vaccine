@@ -9,8 +9,8 @@
     <br>
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
+		<input type="hidden" name="userId2" value=<%= userId %>>
     <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation2()" name="button" value="1">Submit</button>
-		<input type="hidden" name="userId" value=<%= userId %>>
 	</form>
   </div>
 
@@ -25,6 +25,7 @@
 
   <form class="timerForm" action="/question2" method="post">
     <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
+		<input type="hidden" name="userId" value=<%= userId %>>
     <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
   </form>
 
