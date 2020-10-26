@@ -25,7 +25,7 @@ app.use(passport.session());
 
 mongoose.connect("mongodb://admin123:Thisisfindthevaccine@cluster0-shard-00-00.rwtqh.mongodb.net:27017,cluster0-shard-00-01.rwtqh.mongodb.net:27017,cluster0-shard-00-02.rwtqh.mongodb.net:27017/innerveDB?ssl=true&replicaSet=atlas-w87s30-shard-0&authSource=admin&retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
-
+mongoose.set('useFindAndModify', false);
 const innerveSchema = new mongoose.Schema({
   name: String,
   username: String,
@@ -77,12 +77,6 @@ passport.deserializeUser(Innerve.deserializeUser());
 
 let mapUrl = [];
 let names = [];
-let name, userId;
-
-var ques1="bcwshegjkd", ques2="hgbcjhsd", ques3="bsdhdbcjs", ques4="hsbjchjgcg", ques5="bsjcbjhs", population=8000;
-var ques6="hbsvjhsb", ques7="uashiuaj", ques8="kjehfish", ques9="shuegfwh", ques10="nbsahbkj";
-var ques11="sbvjzhbjkws",  ques12="sbvjzhbjkws", ques13="sbvjzhbjkws", ques14="sbvjzhbjkws", ques15="sbvjzhbjkws";
-
 // app.get("/", (req,res)=>{
 //   mapNames.mapNames().forEach(function(item){
 //     names.push(item);
@@ -110,17 +104,17 @@ app.get("/instruction", (req,res)=>{
 
 app.get("/map/:userId", (req, res) => {
   if (req.isAuthenticated()) {
-    userId = req.params.userId;
+    const userId = req.params.userId;
         Innerve.findOne({
           _id: userId
         }, function(err, country) {
           if (!err) {
-            name = country.name;
-            ques1 = country.question1;ques2 = country.question2;ques3 = country.question3;ques4 = country.question4;
-            ques5 = country.question5;ques11 = country.question11;ques12 = country.question12;ques13 = country.question13;
-            ques14 = country.question14;ques15 = country.question15;ques6 = country.containment1;ques7 = country.containment2;
-            ques8 = country.containment3;ques9 = country.containment4;ques10 = country.containment5;population = country.population;
-            console.log("population:" + population);
+            var name = country.name;
+            var ques1 = country.question1,ques2 = country.question2,ques3 = country.question3,ques4 = country.question4,
+            ques5 = country.question5,ques11 = country.question11,ques12 = country.question12,ques13 = country.question13,
+            ques14 = country.question14,ques15 = country.question15,ques6 = country.containment1,ques7 = country.containment2,
+            ques8 = country.containment3,ques9 = country.containment4,ques10 = country.containment5,population = country.population;
+
             res.render("map", {name: name,userId: userId,ques1: ques1,ques2: ques2,ques3: ques3,ques4: ques4,ques5: ques5,
               ques6: ques6,ques7: ques7,ques8: ques8,ques9: ques9,ques10: ques10,ques11: ques11,
               ques12: ques12,ques13: ques13,ques14: ques14,ques15: ques15,population: population
@@ -184,138 +178,140 @@ app.post("/login", (req,res)=>{
 // question1
 app.post("/map/:userId",(req,res)=>{
   var buttonName = req.body.btn;
+  const userId = req.params.userId;
+
   if(buttonName==="1"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question1",{population: population, timeLeft1: found.timeLeft1});
+        res.render("question1",{population: found.population, timeLeft1: found.timeLeft1, userId: userId});
       }
     });
   }
   else if(buttonName==="2"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question2",{population: population, timeLeft2: found.timeLeft2});
+        res.render("question2",{population: found.population, timeLeft2: found.timeLeft2, userId: userId});
       }
     });
   }
   else if(buttonName==="3"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question3",{population: population, timeLeft3: found.timeLeft3});
+        res.render("question3",{population: found.population, timeLeft3: found.timeLeft3, userId: userId});
       }
     });
   }
   else if(buttonName==="4"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question4",{population: population, timeLeft4: found.timeLeft4});
+        res.render("question4",{population: found.population, timeLeft4: found.timeLeft4, userId: userId});
       }
     });
   }
   else if(buttonName==="5"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question5",{population: population, timeLeft5: found.timeLeft5});
+        res.render("question5",{population: found.population, timeLeft5: found.timeLeft5, userId: userId});
       }
     });
   }
   else if(buttonName==="6"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment1",{population: population, timeLeft6: found.timeLeft6});
+        res.render("containment1",{population: found.population, timeLeft6: found.timeLeft6, userId: userId});
       }
     });
   }
   else if(buttonName==="7"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment2",{population: population, timeLeft7: found.timeLeft7});
+        res.render("containment2",{population: found.population, timeLeft7: found.timeLeft7, userId: userId});
       }
     });
   }
   else if(buttonName==="8"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment3",{population: population, timeLeft8: found.timeLeft8});
+        res.render("containment3",{population: found.population, timeLeft8: found.timeLeft8, userId: userId});
       }
     });
   }
   else if(buttonName==="9"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment4",{population: population, timeLeft9: found.timeLeft9});
+        res.render("containment4",{population: found.population, timeLeft9: found.timeLeft9, userId: userId});
       }
     });
   }
   else if(buttonName==="10"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment5",{population: population, timeLeft10: found.timeLeft10});
+        res.render("containment5",{population: found.population, timeLeft10: found.timeLeft10, userId: userId});
       }
     });
   }
   else if(buttonName==="11"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question11",{population: population, timeLeft11: found.timeLeft11});
+        res.render("question11",{population: found.population, timeLeft11: found.timeLeft11, userId: userId});
       }
     });
   }
   else if(buttonName==="12"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question12",{population: population, timeLeft12: found.timeLeft12});
+        res.render("question12",{population: found.population, timeLeft12: found.timeLeft12, userId: userId});
       }
     });
   }
   else if(buttonName==="13"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question13",{population: population, timeLeft13: found.timeLeft13});
+        res.render("question13",{population: found.population, timeLeft13: found.timeLeft13, userId: userId});
       }
     });
   }
   else if(buttonName==="14"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question14",{population: population, timeLeft14: found.timeLeft14});
+        res.render("question14",{population: found.population, timeLeft14: found.timeLeft14, userId: userId});
       }
     });
   }
   else if(buttonName==="15"){
-    Innerve.findOne({name: name}, (err,found)=>{
+    Innerve.findOne({_id: userId}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question15",{population: population, timeLeft15: found.timeLeft15});
+        res.render("question15",{population: found.population, timeLeft15: found.timeLeft15, userId: userId});
       }
     });
   }else if(buttonName=="16"){
@@ -325,38 +321,40 @@ app.post("/map/:userId",(req,res)=>{
 
 app.post("/question1", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans1;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question1: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question1: answer,population: infectedPopulation}, (err, found)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        console.log("infectedPopulation Updated - " + found.population);
       }
     });
     res.redirect("/map/"+userId);
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft1: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft1: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question1",{population: found.population, timeLeft1: timeLeft, userId: userId});
       }
     });
-    res.render("question1",{population: population, timeLeft1: timeLeft});
   }
 })
 // question2
 
 app.post("/question2", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question2: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -367,24 +365,25 @@ app.post("/question2", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft2: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft2: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question2",{population: found.population, timeLeft2: timeLeft, userId: userId});
       }
     });
-    res.render("question2",{population: population, timeLeft2: timeLeft});
   }
 })
 // question3
 
 app.post("/question3", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans3;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question3: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -395,24 +394,25 @@ app.post("/question3", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft3: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft3: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question3",{population: found.population, timeLeft3: timeLeft, userId: userId});
       }
     });
-    res.render("question3",{population: population, timeLeft3: timeLeft});
   }
 });
 // question4
 
 app.post("/question4", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans4;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question4: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -423,24 +423,25 @@ app.post("/question4", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft4: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft4: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question4",{population: found.population, timeLeft4: timeLeft, userId: userId});
       }
     });
-    res.render("question4",{population: population, timeLeft4: timeLeft});
   }
 })
 
 // question5
 app.post("/question5", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans5;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question5: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -451,24 +452,25 @@ app.post("/question5", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft5: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft5: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question5",{population: found.population, timeLeft5: timeLeft, userId: userId});
       }
     });
-    res.render("question5",{population: population, timeLeft5: timeLeft});
   }
 })
 
 //containment1
 app.post("/containmentZone1", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.con1;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {containment1: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {containment1: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -479,24 +481,25 @@ app.post("/containmentZone1", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft6: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft6: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("containment1",{population: found.population, timeLeft6: timeLeft, userId: userId});
       }
     });
-    res.render("containment1",{population: population, timeLeft6: timeLeft});
   }
 })
 
 //containment2
 app.post("/containmentZone2", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.con2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {containment2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {containment2: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -507,24 +510,25 @@ app.post("/containmentZone2", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft7: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft7: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("containment2",{population: found.population, timeLeft7: timeLeft, userId: userId});
       }
     });
-    res.render("containment2",{population: population, timeLeft7: timeLeft});
   }
 })
 
 //containment3
 app.post("/containmentZone3", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.con3;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {containment3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {containment3: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -535,24 +539,25 @@ app.post("/containmentZone3", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft8: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft8: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("containment3",{population: found.population, timeLeft8: timeLeft, userId: userId});
       }
     });
-    res.render("containment3",{population: population, timeLeft8: timeLeft});
   }
 });
 
 //containment14
 app.post("/containmentZone4", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.con4;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {containment4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {containment4: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -563,24 +568,25 @@ app.post("/containmentZone4", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft9: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft9: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("containment4",{population: found.population, timeLeft9: timeLeft, userId: userId});
       }
     });
-    res.render("containment4",{population: population, timeLeft9: timeLeft});
   }
 });
 
 //containment5
 app.post("/containmentZone5", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.con5;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {containment5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {containment5: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -591,24 +597,25 @@ app.post("/containmentZone5", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft10: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft10: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("containment5",{population: found.population, timeLeft10: timeLeft, userId: userId});
       }
     });
-    res.render("containment5",{population: population, timeLeft10: timeLeft});
   }
 });
 
 //question11
 app.post("/question11", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans11;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question11: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question11: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -619,24 +626,25 @@ app.post("/question11", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft11: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft11: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question11",{population: found.population, timeLeft11: timeLeft, userId: userId});
       }
     });
-    res.render("question11",{population: population, timeLeft11: timeLeft});
   }
 });
 
 //question12
 app.post("/question12", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans12;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question12: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question12: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -647,24 +655,25 @@ app.post("/question12", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft12: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft12: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question12",{population: found.population, timeLeft12: timeLeft, userId: userId});
       }
     });
-    res.render("question12",{population: population, timeLeft12: timeLeft});
   }
 });
 
 //question13
 app.post("/question13", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans13;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question13: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question13: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -675,24 +684,25 @@ app.post("/question13", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft13: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft13: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question13",{population: found.population, timeLeft13: timeLeft, userId: userId});
       }
     });
-    res.render("question13",{population: population, timeLeft13: timeLeft});
   }
 });
 
 //question14
 app.post("/question14", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans14;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question14: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question14: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -703,24 +713,25 @@ app.post("/question14", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft14: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft14: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question14",{population: found.population, timeLeft14: timeLeft, userId: userId});
       }
     });
-    res.render("question14",{population: population, timeLeft14: timeLeft});
   }
 });
 
 //question15
 app.post("/question15", (req,res)=>{
   var formButton = req.body.button;
+  var userId = req.body.userId;
   if(formButton==="1"){
     var answer = req.body.ans15;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.updateOne({name: name}, {question15: answer,population: infectedPopulation}, (err)=>{
+    Innerve.updateOne({_id: userId}, {question15: answer,population: infectedPopulation}, (err)=>{
       if(err){
         console.log(err);
       }else{
@@ -731,14 +742,14 @@ app.post("/question15", (req,res)=>{
   }
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
-    Innerve.updateOne({name: name}, {timeLeft15: timeLeft}, (err)=>{
+    Innerve.updateOne({_id: userId}, {timeLeft15: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
+        res.render("question15",{population: found.population, timeLeft15: timeLeft, userId: userId});
       }
     });
-    res.render("question15",{population: population, timeLeft15: timeLeft});
   }
 });
 
