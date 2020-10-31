@@ -5,8 +5,6 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
-const syntaxError = require("syntax-error");
-const mapNames = require("./mapNames.js");
 
 const app = express();
 
@@ -60,8 +58,22 @@ const innerveSchema = new mongoose.Schema({
   timeLeft12: Number,
   timeLeft13: Number,
   timeLeft14: Number,
-  timeLeft15: Number
-
+  timeLeft15: Number,
+  count1: Number,
+  count2: Number,
+  count3: Number,
+  count4: Number,
+  count5: Number,
+  count6: Number,
+  count7: Number,
+  count8: Number,
+  count9: Number,
+  count10: Number,
+  count11: Number,
+  count12: Number,
+  count13: Number,
+  count14: Number,
+  count15: Number
 },
 { collection: 'country' }
 )
@@ -74,17 +86,6 @@ passport.use(Innerve.createStrategy());
 
 passport.serializeUser(Innerve.serializeUser());
 passport.deserializeUser(Innerve.deserializeUser());
-
-let mapUrl = [];
-let names = [];
-// app.get("/", (req,res)=>{
-//   mapNames.mapNames().forEach(function(item){
-//     names.push(item);
-//     let newUrl = "/map/"+item;
-//     mapUrl.push(newUrl);
-//   })
-//   res.render("home", {mapNames: names, mapUrl: mapUrl});
-// });
 
 app.get("/",(req,res)=>{
   res.render("test");
@@ -167,14 +168,17 @@ app.post("/login", (req,res)=>{
       console.log(err);
     }else{
       passport.authenticate("local")(req,res, ()=>{
-        Innerve.findOne({_id: req.user._id}, (err,foundUser)=>{
+        Innerve.findOne({name: req.body.username}, (err,foundUser)=>{
           res.redirect("/map/" + foundUser._id);
         })
       })
     }
   })
 })
-
+app.get("/logout",(req,res)=>{
+  req.logout();
+  res.redirect("/");
+})
 // question1
 app.post("/map/:userId",(req,res)=>{
   var buttonName = req.body.btn;
@@ -185,7 +189,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question1",{population: found.population, timeLeft1: found.timeLeft1, userId: userId});
+        res.render("question1",{population: found.population, timeLeft1: found.timeLeft1, userId: userId, count1:found.count1});
       }
     });
   }
@@ -194,7 +198,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question2",{population: found.population, timeLeft2: found.timeLeft2, userId: userId});
+        res.render("question2",{population: found.population, timeLeft2: found.timeLeft2, userId: userId, count2:found.count2});
       }
     });
   }
@@ -203,7 +207,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question3",{population: found.population, timeLeft3: found.timeLeft3, userId: userId});
+        res.render("question3",{population: found.population, timeLeft3: found.timeLeft3, userId: userId, count3:found.count3});
       }
     });
   }
@@ -212,7 +216,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question4",{population: found.population, timeLeft4: found.timeLeft4, userId: userId});
+        res.render("question4",{population: found.population, timeLeft4: found.timeLeft4, userId: userId, count4:found.count4});
       }
     });
   }
@@ -221,7 +225,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question5",{population: found.population, timeLeft5: found.timeLeft5, userId: userId});
+        res.render("question5",{population: found.population, timeLeft5: found.timeLeft5, userId: userId, count5:found.count5});
       }
     });
   }
@@ -230,7 +234,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment1",{population: found.population, timeLeft6: found.timeLeft6, userId: userId});
+        res.render("containment1",{population: found.population, timeLeft6: found.timeLeft6, userId: userId, count6:found.count6});
       }
     });
   }
@@ -239,7 +243,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment2",{population: found.population, timeLeft7: found.timeLeft7, userId: userId});
+        res.render("containment2",{population: found.population, timeLeft7: found.timeLeft7, userId: userId, count7:found.count7});
       }
     });
   }
@@ -248,7 +252,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment3",{population: found.population, timeLeft8: found.timeLeft8, userId: userId});
+        res.render("containment3",{population: found.population, timeLeft8: found.timeLeft8, userId: userId, count8:found.count8});
       }
     });
   }
@@ -257,7 +261,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment4",{population: found.population, timeLeft9: found.timeLeft9, userId: userId});
+        res.render("containment4",{population: found.population, timeLeft9: found.timeLeft9, userId: userId, count9:found.count9});
       }
     });
   }
@@ -266,7 +270,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("containment5",{population: found.population, timeLeft10: found.timeLeft10, userId: userId});
+        res.render("containment5",{population: found.population, timeLeft10: found.timeLeft10, userId: userId, count10:found.count10});
       }
     });
   }
@@ -275,7 +279,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question11",{population: found.population, timeLeft11: found.timeLeft11, userId: userId});
+        res.render("question11",{population: found.population, timeLeft11: found.timeLeft11, userId: userId, count11:found.count11});
       }
     });
   }
@@ -284,7 +288,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question12",{population: found.population, timeLeft12: found.timeLeft12, userId: userId});
+        res.render("question12",{population: found.population, timeLeft12: found.timeLeft12, userId: userId, count12:found.count12});
       }
     });
   }
@@ -293,7 +297,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question13",{population: found.population, timeLeft13: found.timeLeft13, userId: userId});
+        res.render("question13",{population: found.population, timeLeft13: found.timeLeft13, userId: userId, count13:found.count13});
       }
     });
   }
@@ -302,7 +306,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question14",{population: found.population, timeLeft14: found.timeLeft14, userId: userId});
+        res.render("question14",{population: found.population, timeLeft14: found.timeLeft14, userId: userId, count14:found.count14});
       }
     });
   }
@@ -311,7 +315,7 @@ app.post("/map/:userId",(req,res)=>{
       if(err){
         console.log(err);
       }else{
-        res.render("question15",{population: found.population, timeLeft15: found.timeLeft15, userId: userId});
+        res.render("question15",{population: found.population, timeLeft15: found.timeLeft15, userId: userId, count15:found.count15});
       }
     });
   }else if(buttonName=="16"){
@@ -325,12 +329,20 @@ app.post("/question1", (req,res)=>{
     var answer = req.body.ans1;
     var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    console.log(userId);
-    Innerve.findOneAndUpdate({_id: userId}, {question1: answer,population: infectedPopulation}, (err, found)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated - " + found.population);
+        if(foundUser.count1=="1"){
+          var count1 = req.body.count1;
+          Innerve.findOneAndUpdate({_id: userId}, {question1: answer,population: infectedPopulation, count1: count1}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count1);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -338,14 +350,12 @@ app.post("/question1", (req,res)=>{
   else if(formButton==="2"){
     var timeLeft = req.body.timeLeftData;
     var userId = req.body.userId;
-    console.log(userId);
     Innerve.findOneAndUpdate({_id: userId}, {timeLeft1: timeLeft}, (err,found)=>{
       if(err){
         console.log(err);
       }else{
         console.log("Time Updated");
-        console.log(found._id);
-        res.render("question1",{population: found.population, timeLeft1: timeLeft, userId: found._id});
+        res.render("question1",{population: found.population, timeLeft1: timeLeft, userId: found._id, count1: found.count1});
       }
     });
   }
@@ -355,14 +365,23 @@ app.post("/question1", (req,res)=>{
 app.post("/question2", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans2;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count2=="1"){
+          var count2 = req.body.count2;
+          Innerve.findOneAndUpdate({_id: userId}, {question2: answer,population: infectedPopulation, count2: count2}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count2);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -375,7 +394,7 @@ app.post("/question2", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question2",{population: found.population, timeLeft2: timeLeft, userId: found._id});
+        res.render("question2",{population: found.population, timeLeft2: timeLeft, userId: found._id, count2: found.count2});
       }
     });
   }
@@ -385,14 +404,23 @@ app.post("/question2", (req,res)=>{
 app.post("/question3", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans3;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count3=="1"){
+          var count3 = req.body.count3;
+          Innerve.findOneAndUpdate({_id: userId}, {question3: answer,population: infectedPopulation, count3: count3}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count3);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -405,7 +433,7 @@ app.post("/question3", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question3",{population: found.population, timeLeft3: timeLeft, userId: found._id});
+        res.render("question3",{population: found.population, timeLeft3: timeLeft, userId: found._id, count3: found.count3});
       }
     });
   }
@@ -415,14 +443,23 @@ app.post("/question3", (req,res)=>{
 app.post("/question4", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans4;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count4=="1"){
+          var count4 = req.body.count4;
+          Innerve.findOneAndUpdate({_id: userId}, {question4: answer,population: infectedPopulation, count4: count4}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count4);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -435,7 +472,7 @@ app.post("/question4", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question4",{population: found.population, timeLeft4: timeLeft, userId: found._id});
+        res.render("question4",{population: found.population, timeLeft4: timeLeft, userId: found._id, count4: found.count4});
       }
     });
   }
@@ -445,14 +482,23 @@ app.post("/question4", (req,res)=>{
 app.post("/question5", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans5;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count5=="1"){
+          var count5 = req.body.count5;
+          Innerve.findOneAndUpdate({_id: userId}, {question5: answer,population: infectedPopulation, count5: count5}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count5);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -465,7 +511,7 @@ app.post("/question5", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question5",{population: found.population, timeLeft5: timeLeft, userId: found._id});
+        res.render("question5",{population: found.population, timeLeft5: timeLeft, userId: found._id, count5: found.count5});
       }
     });
   }
@@ -475,14 +521,23 @@ app.post("/question5", (req,res)=>{
 app.post("/containmentZone1", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.con1;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {containment1: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count6=="1"){
+          var count6 = req.body.count6;
+          Innerve.findOneAndUpdate({_id: userId}, {containment1: answer,population: infectedPopulation, count6: count6}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count6);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -495,7 +550,7 @@ app.post("/containmentZone1", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment1",{population: found.population, timeLeft6: timeLeft, userId: found._id});
+        res.render("containment1",{population: found.population, timeLeft6: timeLeft, userId: found._id, count6: found.count6});
       }
     });
   }
@@ -505,14 +560,23 @@ app.post("/containmentZone1", (req,res)=>{
 app.post("/containmentZone2", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.con2;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {containment2: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count7=="1"){
+          var count7 = req.body.count7;
+          Innerve.findOneAndUpdate({_id: userId}, {containment2: answer,population: infectedPopulation, count7: count7}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count7);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -525,7 +589,7 @@ app.post("/containmentZone2", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment2",{population: found.population, timeLeft7: timeLeft, userId: found._id});
+        res.render("containment2",{population: found.population, timeLeft7: timeLeft, userId: found._id, count7: found.count7});
       }
     });
   }
@@ -535,14 +599,23 @@ app.post("/containmentZone2", (req,res)=>{
 app.post("/containmentZone3", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.con3;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {containment3: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count8=="1"){
+          var count8 = req.body.count8;
+          Innerve.findOneAndUpdate({_id: userId}, {containment3: answer,population: infectedPopulation, count8: count8}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count8);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -555,7 +628,7 @@ app.post("/containmentZone3", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment3",{population: found.population, timeLeft8: timeLeft, userId: found._id});
+        res.render("containment3",{population: found.population, timeLeft8: timeLeft, userId: found._id, count8: found.count8});
       }
     });
   }
@@ -565,14 +638,23 @@ app.post("/containmentZone3", (req,res)=>{
 app.post("/containmentZone4", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.con4;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {containment4: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count9=="1"){
+          var count9 = req.body.count9;
+          Innerve.findOneAndUpdate({_id: userId}, {containment4: answer,population: infectedPopulation, count9: count9}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count9);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -585,7 +667,7 @@ app.post("/containmentZone4", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment4",{population: found.population, timeLeft9: timeLeft, userId: found._id});
+        res.render("containment4",{population: found.population, timeLeft9: timeLeft, userId: found._id, count9: found.count9});
       }
     });
   }
@@ -595,14 +677,23 @@ app.post("/containmentZone4", (req,res)=>{
 app.post("/containmentZone5", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.con5;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {containment5: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count10=="1"){
+          var count10 = req.body.count10;
+          Innerve.findOneAndUpdate({_id: userId}, {containment5: answer,population: infectedPopulation, count10: count10}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count10);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -615,7 +706,7 @@ app.post("/containmentZone5", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("containment5",{population: found.population, timeLeft10: timeLeft, userId: found._id});
+        res.render("containment5",{population: found.population, timeLeft10: timeLeft, userId: found._id, count10: found.count10});
       }
     });
   }
@@ -625,14 +716,23 @@ app.post("/containmentZone5", (req,res)=>{
 app.post("/question11", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans11;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question11: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count11=="1"){
+          var count11 = req.body.count11;
+          Innerve.findOneAndUpdate({_id: userId}, {question11: answer,population: infectedPopulation, count11: count11}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count11);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -645,7 +745,7 @@ app.post("/question11", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question11",{population: found.population, timeLeft11: timeLeft, userId: found._id});
+        res.render("question11",{population: found.population, timeLeft11: timeLeft, userId: found._id, count11: found.count11});
       }
     });
   }
@@ -655,14 +755,23 @@ app.post("/question11", (req,res)=>{
 app.post("/question12", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans12;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question12: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count12=="1"){
+          var count12 = req.body.count12;
+          Innerve.findOneAndUpdate({_id: userId}, {question12: answer,population: infectedPopulation, count12: count12}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count12);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -675,7 +784,7 @@ app.post("/question12", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question12",{population: found.population, timeLeft12: timeLeft, userId: found._id});
+        res.render("question12",{population: found.population, timeLeft12: timeLeft, userId: found._id, count12: found.count12});
       }
     });
   }
@@ -685,14 +794,23 @@ app.post("/question12", (req,res)=>{
 app.post("/question13", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans13;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question13: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count13=="1"){
+          var count13 = req.body.count13;
+          Innerve.findOneAndUpdate({_id: userId}, {question13: answer,population: infectedPopulation, count13: count13}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count13);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -705,7 +823,7 @@ app.post("/question13", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question13",{population: found.population, timeLeft13: timeLeft, userId: found._id});
+        res.render("question13",{population: found.population, timeLeft13: timeLeft, userId: found._id, count13: found.count13});
       }
     });
   }
@@ -715,14 +833,23 @@ app.post("/question13", (req,res)=>{
 app.post("/question14", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans14;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question14: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count14=="1"){
+          var count14 = req.body.count14;
+          Innerve.findOneAndUpdate({_id: userId}, {question14: answer,population: infectedPopulation, count14: count14}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count14);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -735,7 +862,7 @@ app.post("/question14", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question14",{population: found.population, timeLeft14: timeLeft, userId: found._id});
+        res.render("question14",{population: found.population, timeLeft14: timeLeft, userId: found._id, count14: found.count14});
       }
     });
   }
@@ -745,14 +872,23 @@ app.post("/question14", (req,res)=>{
 app.post("/question15", (req,res)=>{
   var formButton = req.body.button;
   if(formButton==="1"){
-    var userId = req.body.userId2;
     var answer = req.body.ans15;
+    var userId = req.body.userId2;
     var infectedPopulation = req.body.infectedPopulation;
-    Innerve.findOneAndUpdate({_id: userId}, {question15: answer,population: infectedPopulation}, (err)=>{
+    Innerve.findOne({_id: userId}, (err, foundUser)=>{
       if(err){
         console.log(err);
       }else{
-        console.log("infectedPopulation Updated");
+        if(foundUser.count15=="1"){
+          var count15 = req.body.count15;
+          Innerve.findOneAndUpdate({_id: userId}, {question15: answer,population: infectedPopulation, count15: count15}, (err, found)=>{
+            if(err){
+              console.log(err);
+            }else{
+              console.log("infectedPopulation Updated - " + found.population + " " + found.count15);
+            }
+          });
+        }
       }
     });
     res.redirect("/map/"+userId);
@@ -765,7 +901,7 @@ app.post("/question15", (req,res)=>{
         console.log(err);
       }else{
         console.log("Time Updated");
-        res.render("question15",{population: found.population, timeLeft15: timeLeft, userId: found._id});
+        res.render("question15",{population: found.population, timeLeft15: timeLeft, userId: found._id, count15: found.count15});
       }
     });
   }

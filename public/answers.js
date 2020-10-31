@@ -1,16 +1,15 @@
 function changePopulation1() {
   var ans1 = document.querySelector(".ans1")
   var pop1 = document.getElementById("pop1").value;
-
-  if (ans1.value === "4") {
-    var x = pop1 / 2;
-    document.getElementById("pop2").value = x;
-    console.log("population: " + document.getElementById("pop2").value);
-  } else {
-    var y = pop1 * 2;
-    document.getElementById("pop2").value = y;
-    console.log("population: " + document.getElementById("pop2").value);
-  }
+    if (ans1.value === "4") {
+      var x = pop1 / 2;
+      document.getElementById("pop2").value = x;
+      console.log("population: " + document.getElementById("pop2").value);
+    } else {
+      var y = pop1 * 2;
+      document.getElementById("pop2").value = y;
+      console.log("population: " + document.getElementById("pop2").value);
+    }
 }
 function changePopulation2(){
   var ans2 = document.querySelector(".ans2")

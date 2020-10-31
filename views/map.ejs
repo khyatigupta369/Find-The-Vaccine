@@ -107,7 +107,14 @@
 
   </div>
 
-
+  <!-- <script type="text/javascript">
+    window.addEventListener("beforeunload", function(event){
+      //document.getElementById("closebtn").value = "0";
+      event.preventDefault();
+      event.returnValue = '';
+      window.open('localhost:3000/logout');
+    });
+  </script> -->
   </body>
 <script type="text/javascript" src=<%= "/" + name + "/map.js" %>></script>
 </html>

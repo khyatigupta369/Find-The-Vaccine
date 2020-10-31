@@ -10,81 +10,70 @@
     <input type="hidden" id="pop1" class="input3" name="" value=<%= population %>>
     <input type="hidden" id="pop2" class="input4" name="infectedPopulation">
     <input type="hidden" name="userId2" value=<%= userId %>>
+    <input type="hidden" name="count1" id="count1" value="0">
     <button class="btn btn-warning btn-lg" id="button1" type="submit" onclick="changePopulation1()" name="button" value="1">Submit</button>
   </form>
-</div>
+  </div>
 
-<table class="table table-borderless">
-  <tr class="header">
-    <td style="color: white;">TIME LEFT (in minutes) </td>
-  <tr>
-    <td id="timer" style="color: white;"></td>
-  </tr>
-  <input type="hidden" id="timeLeft" name="" value=<%= timeLeft1 %>>
-</table>
+  <table class="table table-borderless">
+    <tr class="header">
+      <td style="color: white;">TIME LEFT (in minutes) </td>
+    <tr>
+      <td id="timer" style="color: white;"></td>
+    </tr>
+    <input type="hidden" id="timeLeft" name="" value=<%= timeLeft1 %>>
+  </table>
 
-<form class="timerForm" action="/question1" method="post">
-  <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
-  <input type="hidden" name="userId" value=<%= userId %>>
-  <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
-</form>
-<script type="text/javascript" src="/answers.js">
-  // function changePopulation() {
-  //   var ans1 = document.querySelector(".ans1")
-  //   var pop1 = document.getElementById("pop1").value;
-  //
-  //   if (ans1.value === "4") {
-  //     var x = pop1 / 2;
-  //     document.getElementById("pop2").value = x;
-  //     console.log("population: " + document.getElementById("pop2").value);
-  //   } else {
-  //     var y = pop1 * 2;
-  //     document.getElementById("pop2").value = y;
-  //     console.log("population: " + document.getElementById("pop2").value);
-  //   }
-  // }
-</script>
+  <form class="timerForm" action="/question1" method="post">
+    <input type="hidden" id="timeLeftData" name="timeLeftData" value="">
+    <input type="hidden" name="userId" value=<%= userId %>>
+    <button type="submit" id="button2" name="button" value="2" style="visibility: hidden;"></button>
+  </form>
 
-<script>
-  // if (sessionStorage.getItem("total_seconds1")) {
-  //   var total_seconds = sessionStorage.getItem("total_seconds1");
-  // } else {
-  //   var total_seconds = 60 * 0.5;
-  // }
+  <script type="text/javascript" src="/answers.js"></script>
 
-  if (sessionStorage.getItem("total_seconds1")) {
-    var total_seconds = sessionStorage.getItem("total_seconds1");
-  } else {
-    var total_seconds = document.querySelector("#timeLeft").value;
-  }
-
-  var minutes = parseInt(total_seconds / 60);
-  var seconds = parseInt(total_seconds % 60);
-
-  function countDownTimer() {
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-
-    document.getElementById("timer").innerHTML = minutes + " : " + seconds;
-    if (total_seconds > 0) {
-      setInterval(function() {
-        document.querySelector("#timeLeftData").value = total_seconds;
-        document.getElementById("button2").click();
-      }, 10000);
-      total_seconds = total_seconds - 1;
-      minutes = parseInt(total_seconds / 60);
-      seconds = parseInt(total_seconds % 60);
-      sessionStorage.setItem("total_seconds1", total_seconds);
-      setTimeout("countDownTimer()", 1000);
+  <script>
+    if (sessionStorage.getItem("total_seconds1")) {
+      var total_seconds = sessionStorage.getItem("total_seconds1");
     } else {
-      changePopulation();
-      document.getElementById("button1").click();
+      var total_seconds = document.querySelector("#timeLeft").value;
     }
-  }
-  setTimeout("countDownTimer()", 1000);
-</script>
-<script type="text/javascript">  function preventBack() {window.history.forward();}  setTimeout("preventBack()", 0);  window.onunload = function () {null};</script>
+
+    var minutes = parseInt(total_seconds / 60);
+    var seconds = parseInt(total_seconds % 60);
+
+    function countDownTimer() {
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+
+      document.getElementById("timer").innerHTML = minutes + " : " + seconds;
+      if (total_seconds > 0) {
+        setInterval(function() {
+          document.querySelector("#timeLeftData").value = total_seconds;
+          document.getElementById("button2").click();
+        }, 10000);
+        total_seconds = total_seconds - 1;
+        minutes = parseInt(total_seconds / 60);
+        seconds = parseInt(total_seconds % 60);
+        sessionStorage.setItem("total_seconds1", total_seconds);
+        setTimeout("countDownTimer()", 1000);
+      } else {
+        changePopulation();
+        document.getElementById("button1").click();
+      }
+    }
+    setTimeout("countDownTimer()", 1000);
+  </script>
+  <script type="text/javascript">
+    function preventBack() {
+      window.history.forward();
+    }
+    setTimeout("preventBack()", 0);
+    window.onunload = function() {
+      null
+    };
+  </script>
